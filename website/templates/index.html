@@ -29,10 +29,7 @@
     cursor: pointer;
     background-color: rgb(50, 20, 50);
   }
-  .actions {
-    padding: 1em;
-    border: solid 1px rgb(100, 20, 100);
-  }
+
 </style>
 {% endblock %} {% block body %}
 <h1>Overlord API Demo</h1>
@@ -42,6 +39,7 @@
   <label for="location">Location:</label>
   <select name="location" id="location">
     <option>HotelA</option>
+    <option>HotelB</option>
     <option>Timepoint_collector</option>
     <option>PlateLoc</option>
   </select>
@@ -52,8 +50,10 @@
   </select>
   <button type="submit">submit</button>
 </form>
-<div class="actions"></div>
-<button type="button" class="action" onclick="sealPlate()">Seal Plate</button>
+<div class="actions">
+  <button type="button" class="action" onclick="sealPlate()">Seal Plate</button>
+
+</div>
 <script>
   async function sealPlate() {
     fetch("/api/seal-plate", {
