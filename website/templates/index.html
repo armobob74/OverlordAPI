@@ -1,72 +1,90 @@
-{% extends "layout.html" %}
-
-{% block head %}
+{% extends "layout.html" %} {% block head %}
 <style>
-	h1{
-		text-align: center;
-	}
-	form{
-		display:flex;
-		flex-direction: column;
-		gap:0.5em;
-		margin-left:20%;
-		margin-right:20%;
-		margin-bottom:1em;
-		background: white;
-		}
-		button {
-			margin-top:1em;
-			padding: 0.5em;
-			background-color: black;
-			color:white;
-			border: None;
-			transition: 0.2s;
-		}
-		button:hover{
-			cursor: pointer;
-			background-color: rgb(50,20,50);
-		}
+  h1 {
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 1em;
+    background: white;
+    padding: 1em;
+    border: solid 1px black;
+  }
+  button {
+    margin-top: 1em;
+    padding: 0.5em;
+    background-color: black;
+    color: white;
+    border: None;
+    transition: 0.2s;
+  }
+  button.action {
+    background-color: rgb(100, 20, 100);
+  }
+  button:hover {
+    cursor: pointer;
+    background-color: rgb(50, 20, 50);
+  }
+  .actions {
+    padding: 1em;
+    border: solid 1px rgb(100, 20, 100);
+  }
 </style>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 <h1>Overlord API Demo</h1>
 <form>
-	<label for="hotel_nest">Hotel Nest:</label>
-	<input type="text" name="hotel_nest" id="hotel_nest"  value=16>
-	<label for="location">Location:</label>
-	<select name="location" id="location">
-		<option>HotelA</option>
-		<option>Timepoint_collector</option>
-		<option>PlateLoc</option>
-	</select>
-	<label for="operation">Operation:</label>
-	<select name="operation" id="operation">
-		<option>Get</option>
-		<option>Put</option>
-	</select>
-	<button type="submit">submit</button>
+  <label for="hotel_nest">Hotel Nest:</label>
+  <input type="text" name="hotel_nest" id="hotel_nest" value="16" />
+  <label for="location">Location:</label>
+  <select name="location" id="location">
+    <option>HotelA</option>
+    <option>Timepoint_collector</option>
+    <option>PlateLoc</option>
+  </select>
+  <label for="operation">Operation:</label>
+  <select name="operation" id="operation">
+    <option>Get</option>
+    <option>Put</option>
+  </select>
+  <button type="submit">submit</button>
 </form>
+<div class="actions"></div>
+<button type="button" class="action" onclick="sealPlate()">Seal Plate</button>
 <script>
-	document.querySelector('form').addEventListener('submit', function(event) {
-		event.preventDefault();
-		const kwargs = {
-			'location':document.getElementById("location").value,
-			"operation":operation.value,
-			"hotel_nest":hotel_nest.value
-		}
-		fetch('/api/run-sequence', {
-			method: 'POST',
-			headers:{"Content-Type":"application/json"},
-			body: JSON.stringify({'kwargs':kwargs})
-		})
-			.then(response => response.json())
-			.then(data => {
-				// Handle the response data as needed
-			})
-			.catch(error => {
-				// Handle any errors
-			});
-	});
+  async function sealPlate() {
+    fetch("/api/seal-plate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        console.log("Plate sealed!");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const kwargs = {
+      location: document.getElementById("location").value,
+      operation: document.getElementById('operation').value,
+      hotel_nest: document.getElementById('hotel_nest').value,
+    };
+    fetch("/api/move-plate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kwargs: kwargs }),
+    })
+      .then((response) => {
+        console.log("Movement complete!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 </script>
 {% endblock %}
