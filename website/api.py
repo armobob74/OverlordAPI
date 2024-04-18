@@ -32,8 +32,7 @@ def seal_plate():
     Core.Commands.RuntimeInitialize()
     engine = Engine()
     try:
-        # TODO: link the plate-seal ovp
-        proc_info = System.IO.FileInfo(r"C:\Not\A\Real\File\Path\PlateLoc.ovp")
+        proc_info = System.IO.FileInfo(r"C:\Program Files (x86)\PAA\Overlord3\Procedures\Testing\PlateSealer_execute.ovp")
     except:
         raise FileNotFoundError("Can't find the PlateLoc ovp!")
     procedure = Procedure(proc_info)
