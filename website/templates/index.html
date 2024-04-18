@@ -1,11 +1,36 @@
 {% extends "layout.html" %}
 
 {% block head %}
-{# Maybe extra css can go here sometime, idk. #}
+<style>
+	h1{
+		text-align: center;
+	}
+	form{
+		display:flex;
+		flex-direction: column;
+		gap:0.5em;
+		margin-left:20%;
+		margin-right:20%;
+		margin-bottom:1em;
+		background: white;
+		}
+		button {
+			margin-top:1em;
+			padding: 0.5em;
+			background-color: black;
+			color:white;
+			border: None;
+			transition: 0.2s;
+		}
+		button:hover{
+			cursor: pointer;
+			background-color: rgb(50,20,50);
+		}
+</style>
 {% endblock %}
 
 {% block body %}
-<h1>Overlord Demo</h1>
+<h1>Overlord API Demo</h1>
 <form>
 	<label for="hotel_nest">Hotel Nest:</label>
 	<input type="text" name="hotel_nest" id="hotel_nest"  value=16>
@@ -14,6 +39,7 @@
 		<option>HotelA</option>
 		<option>Timepoint_collector</option>
 	</select>
+	<label for="operation">Operation:</label>
 	<select name="operation" id="operation">
 		<option>Get</option>
 		<option>Put</option>
