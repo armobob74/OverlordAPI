@@ -9,9 +9,11 @@ sys.path.append(r"C:\Program Files\Overlord3")
 clr.AddReference('Overlord.FlowRunEngine')
 clr.AddReference('Overlord.Model')
 clr.AddReference('Overlord.Utilities')
+clr.AddReference('System')
 # Once paths are configured, we import the Overlord namespaces
 from Overlord.FlowRunEngine import Engine, Procedure
 from Overlord.Utilities import Core
+import System
 
 path_to_sequence = r"C:\Path\To\sequence.ovp"
 path_to_pvar_file = r"C:\Path\To\variables.pvar" # this is a very simple file in PVAR format

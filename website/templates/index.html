@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{# Maybe extra css can go here sometime, idk. #}
+{% endblock %}
+
+{% block body %}
+<h1>Overlord Demo</h1>
+<form>
+	<label for="hotel_nest">Hotel Name:</label>
+	<input type="text" name="hotel_nest" id="hotel_nest">
+	<label for="location">Location:</label>
+	<input type="text" name="location" id="location">
+	<select name="action">
+		<option>Get</option>
+		<option>Put</option>
+	</select>
+</form>
+<script>
+	document.querySelector('form').addEventListener('submit', function(event) {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		fetch('/api/run-sequence', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				// Handle the response data as needed
+			})
+			.catch(error => {
+				// Handle any errors
+			});
+	});
+</script>
+{% endblock %}
