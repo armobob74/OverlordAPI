@@ -1,5 +1,8 @@
 {% extends "layout.html" %} {% block head %}
 <style>
+  * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
   h1 {
     text-align: center;
   }
@@ -32,7 +35,8 @@
 
 </style>
 {% endblock %} {% block body %}
-<h1>Overlord API Demo</h1>
+<h1>Overlord API</h1>
+<h3>Move Arm</h3>
 <form>
   <label for="hotel_nest">Hotel Nest:</label>
   <input type="text" name="hotel_nest" id="hotel_nest" value="16" />
