@@ -1,4 +1,4 @@
-# Overlord API
+# Overlord API (Requires 32-Bit Python)
 
 This is a simple Flask API designed to run overlord sequences.
 
