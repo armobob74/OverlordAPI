@@ -3,6 +3,7 @@ from flask import Flask
 import clr  # doesn't work on Linux
 import os
 from .views import views
+from flask_cors import CORS
 
 
 # Configure paths to DLLs
@@ -23,6 +24,7 @@ path_to_pvar_file = r"C:\Path\To\variables.pvar" # this is a very simple file in
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.register_blueprint(views)
     from .api import api
     app.register_blueprint(api)
