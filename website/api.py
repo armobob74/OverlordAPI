@@ -9,7 +9,7 @@ path_to_pvar_file = r"C:\Users\chris\Desktop\overlord_variables\release_variable
 def move_plate():
     """
     Either Get from a location or Put to it
-    Currently supporting HotelA, Timepoint_collector, and PlateLoc
+    Currently supporting HotelA, HotelB, Timepoint_collector, Ultrasonic Station, and PlateLoc
     """
     pvar_dict = request.json['kwargs']
     pvar_str = dict_to_pvar_string(pvar_dict)
