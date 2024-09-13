@@ -28,4 +28,5 @@ def create_app():
     app.register_blueprint(views)
     from .api import api
     app.register_blueprint(api)
+    app.config['pvar_lock'] = False
     return app
