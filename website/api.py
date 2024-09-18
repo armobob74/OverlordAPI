@@ -5,7 +5,7 @@ import time
 
 api = Blueprint('api', __name__, url_prefix='/api')
 path_to_pvar_file = r"C:\Users\chris\Desktop\overlord_variables\release_variables.pvar"
-
+using_pvar_lock = False # disabling it in case it causes issues
 
 @api.route('/move-plate',methods=['POST'])
 def move_plate():
@@ -15,10 +15,11 @@ def move_plate():
     """
     pvar_dict = request.json['kwargs']
     pvar_str = dict_to_pvar_string(pvar_dict)
-    while current_app.config['pvar_lock']:
-        print("waiting for pvar lock...")
-        time.sleep(0.27)
-    current_app.config['pvar_lock'] = True
+    if using_pvar_lock:
+        while current_app.config['pvar_lock']:
+            print("waiting for pvar lock...")
+            time.sleep(0.27)
+        current_app.config['pvar_lock'] = True
     with open(path_to_pvar_file,'w') as f:
         f.write(pvar_str)
     Core.Commands.RuntimeInitialize()
@@ -30,7 +31,8 @@ def move_plate():
     procedure = Procedure(proc_info)
     engine.ProcedureComplete += engine_procedure_complete
     engine.Start(procedure)
-    current_app.config['pvar_lock'] = False
+    if using_pvar_lock:
+        current_app.config['pvar_lock'] = False
     return "Sequence ended!"
 
 @api.route('seal-plate',methods=['POST'])
